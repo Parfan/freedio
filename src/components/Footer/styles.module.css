@@ -1,0 +1,6 @@
+.footer {
+  background-color: var(--black);
+  min-height: 80px;
+  position: sticky;
+  top: 100%;
+}

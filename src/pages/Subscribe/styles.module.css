@@ -1,0 +1,32 @@
+.container {
+  height: calc(100vh - 160px);
+  display: flex;;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.card {
+  width: 300px;
+  height: 500px;
+  background-color: var(--white);
+  box-shadow: 0 0 15px var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px;
+  font-size: 1.25rem;
+}
+
+.card h1 {
+  text-align: center;
+}
+
+.btn {
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  background-color: var(--black);
+  border-radius: 5px;
+}

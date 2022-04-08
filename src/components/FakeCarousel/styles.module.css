@@ -1,0 +1,18 @@
+.section {
+  position: relative;
+  display: flex;
+  gap: 60px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  gap: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
