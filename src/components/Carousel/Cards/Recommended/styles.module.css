@@ -1,0 +1,39 @@
+.card {
+  color: black;
+  cursor: pointer;
+  border: 1px solid gray;
+  width: 100%;
+  height: 300px;
+  /* aspect-ratio: 1; */
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.image > img {
+  min-width: 100%;
+}
+
+.info {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tag {
+  background-color: #cb9827;
+  color: white;
+  border-radius: 2px;
+  width: fit-content;
+  padding: 5px;
+  display: inline-block;
+}

@@ -1,0 +1,18 @@
+.card {
+  cursor: pointer;
+  padding: 20px;
+}
+
+.card:hover {
+  background-color: #eee;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.duration {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

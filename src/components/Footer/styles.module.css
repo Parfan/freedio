@@ -1,0 +1,8 @@
+.footer {
+  background-color: #000;
+  color: white;
+  min-height: 80px;
+  margin-top: 50px;
+  position: sticky;
+  top: 100%;
+}

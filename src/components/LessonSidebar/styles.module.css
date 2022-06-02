@@ -1,0 +1,16 @@
+.lessonSidebar {
+  width: 25%;
+  min-width: 280px;
+}
+
+.otherLessons {
+  background-color: #262626;
+  color: white;
+  padding: 20px;
+}
+
+@media screen and (max-width: 980px) {
+  .lessonSidebar {
+    width: 100%;
+  }
+}

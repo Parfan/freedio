@@ -1,0 +1,53 @@
+.lesson {
+  display: flex;
+}
+
+.main {
+  height: 100%;
+  flex-grow: 1;
+}
+
+.video {
+  width: 100%;
+  max-height: 75vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.video > iframe {
+  flex-grow: 1;
+  aspect-ratio: 16/9;
+}
+
+.info {
+  padding: 30px 50px;
+}
+
+.info hr {
+  margin: 30px 0;
+}
+
+.commentCard {
+  margin: 30px 0;
+}
+
+.commentCard:last-of-type {
+  margin-bottom: 0;
+}
+
+.commentCard > h4 > a {
+  color: black;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 980px) {
+  .lesson {
+    display: block;
+  }
+
+  .info {
+    padding: 30px 5%;
+  }
+}

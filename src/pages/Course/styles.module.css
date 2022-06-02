@@ -1,0 +1,52 @@
+.info, .video, .links {
+  width: 100%;
+  padding: 0 20%;
+}
+
+.info {
+  background-color: #000;
+  color: white;
+  margin-top: 50px;
+  padding: 50px 20%;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.video {
+  margin: 50px 0;
+}
+
+.video > iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.links {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.links a {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  width: min(280px, 90%);
+  padding: 15px 10px;
+  display: inline-block;
+}
+
+@media screen and (max-width: 767px) {
+  .info {
+    padding: 25px 5%;
+  }
+
+  .video, .links {
+    padding: 0;
+  }
+}
