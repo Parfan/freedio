@@ -1,9 +1,0 @@
-.form {
-  height: 200px;
-}
-
-.form > div {
-  gap: 20px;
-  display: flex;
-  align-items: space-around;
-}
