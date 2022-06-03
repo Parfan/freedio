@@ -12,9 +12,9 @@ function LessonSidebar(props) {
           key={index}
           index={index + 1}
           id={lesson.id}
-          courseId={lesson.courseId}
-          title={lesson.title}
-          duration={lesson.duration}
+          courseId={lesson.idCurso}
+          title={lesson.titulo}
+          description={lesson.descricao}
         />
       ))}
     </aside>

@@ -43,7 +43,11 @@ function PageRoutes() {
       </Route>
       <Route path="course/:course_id">
         <Route index element={<Course />} />
-        <Route path="lesson/:lesson_id" element={<Lesson />} />
+        <Route path="lesson/:lesson_id" element={
+          <ProtectedRoute isLogged={isLogged}>
+            <Lesson />
+          </ProtectedRoute>
+        } />
       </Route>
       <Route path="plans" element={<Plans />} />
       <Route path="purchase">

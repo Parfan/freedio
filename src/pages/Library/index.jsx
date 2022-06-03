@@ -1,42 +1,23 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import { UserContext } from "../../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
 import styles from "./styles.module.css";
 
 function Library() {
   const [courses, setCourses] = useState([]);
+  const { userInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     // fetch user library
-    setCourses([
-      {
-        id: 123,
-        title: 123,
-        author: 123,
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae fugiat assumenda suscipit dolore debitis id, eveniet optio quis, laudantium neque enim nisi sapiente! Ex debitis minima id ratione libero? Minus!"
-      }, {
-        id: 456,
-        title: 456,
-        author: 456,
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae fugiat assumenda suscipit dolore debitis id, eveniet optio quis, laudantium neque enim nisi sapiente! Ex debitis minima id ratione libero? Minus!"
-      }, {
-        id: 789,
-        title: 789,
-        author: 789,
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae fugiat assumenda suscipit dolore debitis id, eveniet optio quis, laudantium neque enim nisi sapiente! Ex debitis minima id ratione libero? Minus!"
-      }, {
-        id: 789,
-        title: 789,
-        author: 789,
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae fugiat assumenda suscipit dolore debitis id, eveniet optio quis, laudantium neque enim nisi sapiente! Ex debitis minima id ratione libero? Minus!"
-      }, {
-        id: 789,
-        title: 789,
-        author: 789,
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae fugiat assumenda suscipit dolore debitis id, eveniet optio quis, laudantium neque enim nisi sapiente! Ex debitis minima id ratione libero? Minus!"
-      }
-    ]);
+    axios.get(`http://26.197.111.55:6789/usuario/cursos/adquiridos?cpf=${userInfo.id}`)
+      .then(resp => {
+        console.log(resp.data);
+        setCourses(resp.data);
+      }).catch(err => console.log(err));
+
+    
   }, []);
 
   return (

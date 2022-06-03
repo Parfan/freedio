@@ -19,12 +19,12 @@ function CarouselComponent(props) {
             key={card.id}
             id={card.id}
             image={card.image}
-            title={card.title}
-            author={card.author}
-            rating={card.rating}
-            ratingAmount={card.ratingAmount}
-            price={card.price}
-            tag={card.tag}
+            title={card.titulo}
+            author={card.autor}
+            // rating={card.rating}
+            // ratingAmount={card.ratingAmount}
+            price={card.preco}
+            // tag={card.tag}
           />
         ))}
       </Carousel>

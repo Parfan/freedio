@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
@@ -13,7 +14,7 @@ function PurchaseCourse() {
 
   const navigate = useNavigate();
   const { course_id } = useParams();
-  const { isLogged } = useContext(UserContext);
+  const { userInfo, isLogged } = useContext(UserContext);
 
   useEffect(() => {
     if (!isLogged)
@@ -23,8 +24,11 @@ function PurchaseCourse() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("comprou " + course_id);
-    navigate(`/course/${course_id}`)
+    axios.post(`http://26.197.111.55:6789/usuario/curso/adquirir?cpf=${userInfo.id}&id=${course_id}&comprou=${true}`)
+      .then(resp => {
+        console.log("comprou " + course_id);
+        navigate(`/course/${course_id}`)
+      }).catch(err => console.log(err));
   }
 
   return (
@@ -37,7 +41,7 @@ function PurchaseCourse() {
             <input
               type="text"
               value={name}
-              onChange={e => setName(e.target.value.trim())}
+              onChange={e => setName(e.target.value)}
               placeholder="Digite o nome impresso"
               required
             />
@@ -65,7 +69,7 @@ function PurchaseCourse() {
           <label>
             <span>CVV <span style={{ color: "red" }}>*</span></span>
             <input
-              type="text"
+              type="password"
               value={CVV}
               onChange={e => setCVV(e.target.value.trim())}
               placeholder="Digite o código de segurança"

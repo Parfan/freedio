@@ -13,7 +13,7 @@ function Card(props) {
       <div className={styles.duration}>
         <PlayIcon width="1.5rem" height="1.5rem" />
         <p style={{ display: "inline-block" }}>
-          {props.duration}
+          {props.description}
         </p>
       </div>
     </div>

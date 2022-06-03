@@ -1,6 +1,6 @@
-// import { useEffect } from "react";
-// import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import LessonSidebar from "../../components/LessonSidebar";
 import styles from "./styles.module.css";
 
@@ -41,11 +41,24 @@ const lessons = [
 ];
 
 function Lesson() {
-  // const { course_id, lesson_id } = useParams();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [course, setCourse] = useState([]);
+  const [lesson, setLesson] = useState({});
+  const { course_id, lesson_id } = useParams();
 
-  // useEffect(() => {
-  //   // fetch lesson
-  // }, []);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`http://26.197.111.55:6789/curso?id=${course_id}`)
+      .then(resp => {
+        setCourse(resp.data);
+        setLesson(resp.data.aulas.filter(item => item.id == lesson_id)[0]);
+        setShowSidebar(true);
+      }).catch(err => {
+        console.log(err);
+        navigate("/404");
+      });
+  }, []);
 
   return (
     <div className={styles.lesson}>
@@ -60,10 +73,10 @@ function Lesson() {
           ></iframe>
         </div>
         <div className={styles.info}>
-          <h1>Lesson title</h1>
+          <h1>{lesson.titulo}</h1>
           <hr />
           <h2>Descrição</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, corrupti veritatis eaque rem distinctio, modi nihil dolor omnis quod voluptate tenetur. Nemo exercitationem a corporis, nobis nisi alias recusandae aspernatur!</p>
+          <p>{lesson.descricao}</p>
           <hr />
           <h2>Comentários</h2>
           {comments.map(comment => (
@@ -74,7 +87,7 @@ function Lesson() {
           ))}
         </div>
       </main>
-      <LessonSidebar lessons={lessons} />
+      {showSidebar ? <LessonSidebar lessons={course.aulas} /> : false}
     </div>
   );
 }

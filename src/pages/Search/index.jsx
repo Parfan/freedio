@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
@@ -7,6 +7,14 @@ function Search() {
   const [text, setText] = useState("");
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`http://26.197.111.55:6789/cursos`)
+      .then(resp => {
+        console.log(resp.data);
+        setCourses(resp.data);
+      }).catch(err => console.log(err));
+  }, []);
 
   function handleSearch() {
     axios.get(`http://26.197.111.55:6789/cursos/pesquisar?parametro=${text}`)
@@ -39,9 +47,9 @@ function Search() {
               <img src="https://picsum.photos/200" alt="Course thumbnail" />
             </div>
             <div className={styles.info}>
-              <h4>{course.title}</h4>
-              <p className={styles.author}>{course.author}</p>
-              <p className={styles.description}>{course.description}</p>
+              <h4>{course.titulo}</h4>
+              <p className={styles.author}>{course.autor}</p>
+              <p className={styles.description}>{course.descricao}</p>
             </div>
           </div>
         ))}

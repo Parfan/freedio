@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useContext, useState } from "react";
+import { UserContext } from "../../contexts/userContext";
 import { useParams } from "react-router-dom";
 import Carousel from "../../components/Carousel";
 import styles from "./styles.module.css";
+import axios from "axios";
 
 const cards = [
   {
@@ -57,15 +59,24 @@ const cards = [
 ];
 
 function Profile() {
+  const [courses, setCourses] = useState([]);
   const { id } = useParams();
+  const { userInfo } = useContext(UserContext);
 
   useEffect(() => {
-
+    axios.get(`http://26.197.111.55:6789/cursos/proprios?cpf=${userInfo.id}`)
+      .then(resp => {
+        console.log(resp.data);
+        setCourses(resp.data);
+      }).catch(err => console.log(err));
   }, [id]);
+
+  function createCourse() {
+    
+  }
 
   return (
     <main className="container">
-      {id}
       <div className={styles.info}>
         <h1>Usuário</h1>
         <div>
@@ -73,7 +84,12 @@ function Profile() {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt voluptatibus at quibusdam facere iste ducimus et provident quis, impedit voluptate aspernatur mollitia nisi neque dicta. Fuga quam cupiditate error provident?</p>
         </div>
       </div>
-      {id % 2 === 0 && <Carousel cards={cards}>Meus cursos</Carousel>}
+      {courses.length > 0 ? (
+        <Carousel cards={courses}>Meus cursos</Carousel>
+      ) : false}
+      {userInfo.id === id && (
+        <button onClick={createCourse}>Criar curso</button>
+      )}
     </main>
   );
 }

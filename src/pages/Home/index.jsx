@@ -1,7 +1,10 @@
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../../components/Carousel";
 import styles from "./styles.module.css";
 import { StudyingSVG } from "../../assets/svg/StudyingSVG.jsx";
+import axios from "axios";
+import { UserContext } from "../../contexts/userContext";
 
 const cards = [
   {
@@ -57,20 +60,35 @@ const cards = [
 ];
 
 function Home() {
+  const [courses, setCourses] = useState([]);
+  const { isLogged, userInfo } = useContext(UserContext);
+
+  useEffect(() => {
+    axios.get(`http://26.197.111.55:6789/cursos`)
+      .then(resp => {
+        setCourses(resp.data);
+        console.log(resp.data);
+      }).catch(err => console.log(err));
+  }, []);
+
   return (
     <main className="container">
       <section className={styles.banner}>
         <div className={styles.bannerOptions}>
           <h1>Bem-vindo!</h1>
           <p>Comece seus estudos agora mesmo e/ou conheça nossos planos para menores distrações</p>
-          <Link to="/">Começar os estudos</Link>
-          <Link to="/plans">Conheça nossos planos</Link>
+          {isLogged ? (
+            <Link to={`/user/:${userInfo.id}/library`}>Começar os estudos</Link>
+          ) : (
+            <Link to="/login">Começar os estudos</Link>
+          )}
+          {/* <Link to="/plans">Conheça nossos planos</Link> */}
         </div>
         <StudyingSVG />
       </section>
-      <Carousel cards={cards}>Cursos em promoção</Carousel>
-      <Carousel cards={cards}>Cursos recomendados</Carousel>
-      <Carousel cards={cards}>Promoções de <Link to="/404">Blender 3D</Link></Carousel>
+      <Carousel cards={courses}>Cursos em promoção</Carousel>
+      <Carousel cards={courses}>Cursos recomendados</Carousel>
+      <Carousel cards={courses}>Promoções de <Link to="/404">Blender 3D</Link></Carousel>
     </main>
   );
 }
