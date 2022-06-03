@@ -6,6 +6,8 @@ import Course from "../pages/Course";
 import Lesson from "../pages/Lesson";
 import Plans from "../pages/Plans";
 import PurchaseCourse from "../pages/PurchaseCourse";
+import Search from "../pages/Search";
+import Settings from "../pages/Settings";
 import NotFound from "../pages/NotFound";
 
 export {
@@ -17,5 +19,7 @@ export {
   Lesson,
   Plans,
   PurchaseCourse,
+  Search,
+  Settings,
   NotFound
 };

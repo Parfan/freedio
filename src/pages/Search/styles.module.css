@@ -1,0 +1,35 @@
+.searchContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.searchBar {
+  border: 2px solid black;
+  font-size: 1.1rem;
+  outline: none;
+  padding: 10px;
+  flex: 1;
+}
+
+.searchBar:focus {
+  border: 2px solid blue;
+}
+
+.searchBar::placeholder {
+  font-size: 0.9rem;
+}
+
+.searchBtn {
+  background-color: black;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  min-width: 30%;
+  padding: 20px 50px;
+  margin-top: 5px;
+}
+
+.searchBtn:hover {
+  opacity: 0.9;
+}

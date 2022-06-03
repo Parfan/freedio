@@ -1,17 +1,15 @@
-import { useState } from "react";
-// import { useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/userContext";
+import axios from "axios";
 import styles from "./styles.module.css";
 
 function LoginForm() {
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showErrorMessage, ] = useState(false);
-  const [errorMessage, ] = useState("");
-  // const [showErrorMessage, setShowErrorMessage] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState<string>("");
-  // const userContext = useContext(UserContext);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -42,7 +40,19 @@ function LoginForm() {
     // Completes the user log-in
     // localStorage.setItem("activeId", `["${userId}"]`);
     // userContext.setActiveId([userId]);
-    setTimeout(() => navigate("/"), 1000);
+
+    axios.get(`http://26.197.111.55:6789/usuario/login?email=${email}&senha=${password}`)
+      .then(resp => {
+        console.log(resp);
+
+        if (resp.data === null) {
+          setErrorMessage("Email ou senha inválida.");
+          setShowErrorMessage(true);
+        } else {
+          setUserInfo({ id: resp.data.cpf, email: resp.data.email });
+          setTimeout(() => navigate("/"), 1000);
+        }
+      }).catch(err => console.warn(err));
   }
 
   return (
@@ -50,12 +60,12 @@ function LoginForm() {
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Entrar</h1>
         <label>
-          <span>Usuário <span style={{ color: "red" }}>*</span></span>
+          <span>Email <span style={{ color: "red" }}>*</span></span>
           <input
             type="text"
-            value={user}
-            onChange={e => setUser(e.target.value.trim())}
-            placeholder="Digite seu usuário"
+            value={email}
+            onChange={e => setEmail(e.target.value.trim())}
+            placeholder="Digite seu email"
             required
           />
         </label>

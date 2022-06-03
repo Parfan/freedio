@@ -6,7 +6,11 @@ import "./styles.css";
 
 function Menu() {
   const [active, setActive] = useState(false);
-  const { isLogged, userInfo } = useContext(UserContext);
+  const { isLogged, userInfo, setUserInfo } = useContext(UserContext);
+
+  function closeMenu() {
+    setActive(false);
+  }
 
   return (
     <nav className="nav">
@@ -22,16 +26,18 @@ function Menu() {
         <ul className="nav-items">
           {isLogged ? (
             <>
-              <li><Link to="/">Início</Link></li>
-              <li><Link to={`/user/${userInfo.id}/library`}>Biblioteca</Link></li>
-              <li><Link to="/">Início</Link></li>
-              <li><Link to="/">Início</Link></li>
+              <li><Link to="/" onClick={closeMenu}>Início</Link></li>
+              <li><Link to={`/search`} onClick={closeMenu}>Buscar</Link></li>
+              <li><Link to={`/user/${userInfo.id}/library`} onClick={closeMenu}>Biblioteca</Link></li>
+              <li><Link to={`/user/${userInfo.id}`} onClick={closeMenu}>Perfil</Link></li>
+              <li><Link to={`/user/${userInfo.id}/settings`} onClick={closeMenu}>Configurações</Link></li>
+              <li><Link to="/" onClick={() => { setUserInfo({}); closeMenu() }}>Sair</Link></li>
             </>
           ) : (
             <>
-              <li><Link to="/">Início</Link></li>
-              <li><Link to="/login">Entrar</Link></li>
-              <li><Link to="/signup">Cadastrar</Link></li>
+              <li><Link to="/" onClick={closeMenu}>Início</Link></li>
+              <li><Link to="/login" onClick={closeMenu}>Entrar</Link></li>
+              <li><Link to="/signup" onClick={closeMenu}>Cadastrar</Link></li>
             </>
           )}
         </ul>

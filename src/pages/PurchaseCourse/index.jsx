@@ -1,19 +1,30 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../../contexts/userContext";
 import styles from "./styles.module.css";
 
 function PurchaseCourse() {
-  const [cartao, setCartao] = useState("");
-  const [validade, setValidade] = useState("");
+  const [name, setName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [validity, setValidity] = useState("");
   const [CVV, setCVV] = useState("");
   const [showErrorMessage, ] = useState(false);
   const [errorMessage, ] = useState("");
+
+  const navigate = useNavigate();
   const { course_id } = useParams();
+  const { isLogged } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!isLogged)
+      navigate("/login");
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(course_id);
+    console.log("comprou " + course_id);
+    navigate(`/course/${course_id}`)
   }
 
   return (
@@ -22,12 +33,22 @@ function PurchaseCourse() {
         <form onSubmit={handleSubmit} className={styles.form}>
           <h1>Comprar curso</h1>
           <label>
-            <span>Cartão de Crédito <span style={{ color: "red" }}>*</span></span>
+            <span>Nome impresso <span style={{ color: "red" }}>*</span></span>
             <input
               type="text"
-              value={cartao}
-              onChange={e => setCartao(e.target.value.trim())}
-              placeholder="Número do cartão"
+              value={name}
+              onChange={e => setName(e.target.value.trim())}
+              placeholder="Digite o nome impresso"
+              required
+            />
+          </label>
+          <label>
+            <span>Número do cartão <span style={{ color: "red" }}>*</span></span>
+            <input
+              type="text"
+              value={cardNumber}
+              onChange={e => setCardNumber(e.target.value.trim())}
+              placeholder="Digite o número do cartão"
               required
             />
           </label>
@@ -35,9 +56,9 @@ function PurchaseCourse() {
             <span>Data de validade <span style={{ color: "red" }}>*</span></span>
             <input
               type="text"
-              value={validade}
-              onChange={e => setValidade(e.target.value.trim())}
-              placeholder="Número do cartão"
+              value={validity}
+              onChange={e => setValidity(e.target.value.trim())}
+              placeholder="Digite o vencimento do cartão"
               required
               />
           </label>
@@ -47,7 +68,7 @@ function PurchaseCourse() {
               type="text"
               value={CVV}
               onChange={e => setCVV(e.target.value.trim())}
-              placeholder="3 dígitos"
+              placeholder="Digite o código de segurança"
               required
             />
           </label>

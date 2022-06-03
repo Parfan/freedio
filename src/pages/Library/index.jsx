@@ -1,12 +1,16 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../../contexts/userContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import { UserContext } from "../../contexts/userContext";
 import styles from "./styles.module.css";
 
 function Library() {
-  const [courses, setCourses] = useState([{ id: 123 }, { id: 456 }]);
+  const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
-  const { id } = useParams();
+
+  useEffect(() => {
+    // fetch user library
+    setCourses([{ id: 123 }, { id: 456 }, { id: 789 }, { id: 111 }, { id: 222 }]);
+  }, []);
 
   return (
     <main className="container">

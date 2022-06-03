@@ -31,11 +31,17 @@ function Course() {
   return (
     <main className="container">
       <section className={styles.info}>
-        <h1>{course.title} {course_id}</h1>
-        <p className={styles.description}>{course.description}</p>
-        <p>Curso por: {course.author}</p>
-        <p>{course.rating} ({course.ratingAmount} avaliações)</p>
-        <p>Quantidade de aulas: {course.lessonAmount}</p>
+        <div>
+          <h1>{course.title} {course_id}</h1>
+          <p className={styles.description}>{course.description}</p>
+          <p>Curso por: {course.author}</p>
+          <p>{course.rating} ({course.ratingAmount} avaliações)</p>
+          <p>Quantidade de aulas: {course.lessonAmount}</p>
+        </div>
+        <div className={styles.purchase}>
+          <h3>Evite interrupções</h3>
+          <Link to={`/purchase/${course_id}`}>Comprar curso</Link>
+        </div>
       </section>
       <section className={styles.video}>
         <iframe
