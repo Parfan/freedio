@@ -6,7 +6,7 @@ import "./styles.css";
 
 function Menu() {
   const [active, setActive] = useState(false);
-  const { isLogged, userInfo, setUserInfo } = useContext(UserContext);
+  const { isLogged, setIsLogged, userInfo } = useContext(UserContext);
 
   function closeMenu() {
     setActive(false);
@@ -31,7 +31,7 @@ function Menu() {
               <li><Link to={`/user/${userInfo.id}/library`} onClick={closeMenu}>Biblioteca</Link></li>
               <li><Link to={`/user/${userInfo.id}`} onClick={closeMenu}>Perfil</Link></li>
               <li><Link to={`/user/${userInfo.id}/settings`} onClick={closeMenu}>Configurações</Link></li>
-              <li><Link to="/" onClick={() => { setUserInfo({}); closeMenu() }}>Sair</Link></li>
+              <li><Link to="/" onClick={() => { setIsLogged(false); closeMenu() }}>Sair</Link></li>
             </>
           ) : (
             <>

@@ -33,3 +33,40 @@
 .searchBtn:hover {
   opacity: 0.9;
 }
+
+.courseContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.card {
+  box-shadow: 0 0 24px #d3d3d3;
+  border: 1px solid black;
+  cursor: pointer;
+  width: 300px;
+  height: 400px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.image > img {
+  min-width: 100%;
+}
+
+.info {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

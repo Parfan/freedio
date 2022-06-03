@@ -54,8 +54,7 @@ function SignUpForm() {
       setIsErrorMessage(true);
       return;
     }
-    setShowErrorMessage(false);
-
+    
     axios.post("http://26.197.111.55:6789/usuario/registrar", null, {
       params: {
         email: email,
@@ -65,21 +64,19 @@ function SignUpForm() {
       }
     }).then((resp) => {
       setIsErrorMessage(false);
-      setErrorMessage("Login realizado com sucesso.");
-    })
-      .catch(err => {
-        setIsErrorMessage(true);
-        if (err.status === 400) {
-          setErrorMessage("Este email ou CPF já foi cadastrado.");
-        } else {
-          setErrorMessage("Um erro inesperado ocorreu, tente novamente mais tarde.");
-        }
-      });
-
-    if (!isErrorMessage) {
+      setShowErrorMessage(true);
+      setErrorMessage("Login realizado com sucesso.\nRedirecionando...");
       // Redirects to the login page
       setTimeout(() => navigate("/login"), 3000);
-    }
+    }).catch(err => {
+      if (err.status === 400) {
+        setErrorMessage("Este email ou CPF já foi cadastrado.");
+      } else {
+        setErrorMessage("Um erro inesperado ocorreu, tente novamente mais tarde.");
+      }
+      setIsErrorMessage(true);
+      setShowErrorMessage(true);
+    });
   }
 
   function handleCPF(e) {
