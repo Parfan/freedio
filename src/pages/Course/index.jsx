@@ -11,12 +11,12 @@ function Course() {
   const { course_id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://26.197.111.55:6789/curso?id=${course_id}`)
+    axios.get(`http://localhost:6789/curso?id=${course_id}`)
       .then(resp => {
         setCourse(resp.data);
         setShowCourse(true);
         console.warn(resp.data);
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }, []);
 
   return (

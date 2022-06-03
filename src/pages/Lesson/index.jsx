@@ -49,13 +49,13 @@ function Lesson() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://26.197.111.55:6789/curso?id=${course_id}`)
+    axios.get(`http://localhost:6789/curso?id=${course_id}`)
       .then(resp => {
         setCourse(resp.data);
         setLesson(resp.data.aulas.filter(item => item.id == lesson_id)[0]);
         setShowSidebar(true);
       }).catch(err => {
-        console.log(err);
+        console.error(err);
         navigate("/404");
       });
   }, []);

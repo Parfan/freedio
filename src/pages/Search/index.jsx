@@ -9,19 +9,17 @@ function Search() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://26.197.111.55:6789/cursos`)
+    axios.get(`http://localhost:6789/cursos`)
       .then(resp => {
-        console.log(resp.data);
         setCourses(resp.data);
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }, []);
 
   function handleSearch() {
-    axios.get(`http://26.197.111.55:6789/cursos/pesquisar?parametro=${text}`)
+    axios.get(`http://localhost:6789/cursos/pesquisar?parametro=${text}`)
       .then(resp => {
-        console.log(resp.data);
         setCourses(resp.data);
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }
 
   return (

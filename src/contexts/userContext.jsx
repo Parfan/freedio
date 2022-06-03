@@ -15,13 +15,13 @@ function UserProvider(props) {
 
   useEffect(() => {
     if (isLogged) {
-      axios.get(`http://26.197.111.55:6789/usuario?cpf=${userInfo.id}`)
+      axios.get(`http://localhost:6789/usuario?cpf=${userInfo.id}`)
         .then(resp => {
           const info = { ...resp.data, id: resp.data.CPF };
           delete info["CPF"];
           // delete info["senha"];
           setUserInfo(info)
-        }).catch(err => console.log(err));
+        }).catch(err => console.error(err));
     } else {
       setUserInfo({});
     }

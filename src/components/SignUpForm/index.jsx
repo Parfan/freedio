@@ -55,7 +55,7 @@ function SignUpForm() {
       return;
     }
     
-    axios.post("http://26.197.111.55:6789/usuario/registrar", null, {
+    axios.post("http://localhost:6789/usuario/registrar", null, {
       params: {
         email: email,
         cpf: CPF,

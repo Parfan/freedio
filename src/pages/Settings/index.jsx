@@ -18,7 +18,7 @@ function Settings() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios.put(`http://26.197.111.55:6789/usuario/alterar?cpf=${userInfo.id}&nome=${name.trim()}&email=${email}`)
+    axios.put(`http://localhost:6789/usuario/alterar?cpf=${userInfo.id}&nome=${name.trim()}&email=${email}`)
       .then((resp) => {
         console.log("Dados alterados! " + resp.status);
         setUserInfo({ ...userInfo, nome: name.trim(), email });
@@ -31,7 +31,7 @@ function Settings() {
   function handleCardSubmit(e) {
     e.preventDefault();
 
-    axios.post("http://26.197.111.55:6789/usuario/cartao/adicionar", null, {
+    axios.post("http://localhost:6789/usuario/cartao/adicionar", null, {
       params: {
         cpf: userInfo.id,
         nome: userInfo.nome,
@@ -55,7 +55,7 @@ function Settings() {
 
   function removeCard() {
     if (userInfo.cartao) {
-      axios.delete(`http://26.197.111.55:6789/usuario/cartao/remover?numCartao=${userInfo.cartao.numCartao}`)
+      axios.delete(`http://localhost:6789/usuario/cartao/remover?numCartao=${userInfo.cartao.numCartao}`)
         .then((resp) => {
           console.log("Cartão removido! " + resp.status);
           const newInfo = userInfo;
@@ -72,7 +72,7 @@ function Settings() {
     e.preventDefault();
 
     if (password.length > 0) {
-      axios.put(`http://26.197.111.55:6789/usuario/alterar/senha?cpf=${userInfo.id}&senha=${password}`)
+      axios.put(`http://localhost:6789/usuario/alterar/senha?cpf=${userInfo.id}&senha=${password}`)
         .then((resp) => {
           console.log("Senha alterada! " + resp.status);
           setIsLogged(false);
@@ -83,7 +83,7 @@ function Settings() {
   }
 
   function deleteAccount() {
-    axios.delete(`http://26.197.111.55:6789/usuario/remover?cpf=${userInfo.id}`)
+    axios.delete(`http://localhost:6789/usuario/remover?cpf=${userInfo.id}`)
       .then(resp => {
         setIsLogged(false);
       }).catch(err => {

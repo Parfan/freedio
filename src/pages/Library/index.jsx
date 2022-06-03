@@ -11,11 +11,10 @@ function Library() {
 
   useEffect(() => {
     // fetch user library
-    axios.get(`http://26.197.111.55:6789/usuario/cursos/adquiridos?cpf=${userInfo.id}`)
+    axios.get(`http://localhost:6789/usuario/cursos/adquiridos?cpf=${userInfo.id}`)
       .then(resp => {
-        console.log(resp.data);
         setCourses(resp.data);
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
 
     
   }, []);

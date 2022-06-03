@@ -24,11 +24,11 @@ function PurchaseCourse() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios.post(`http://26.197.111.55:6789/usuario/curso/adquirir?cpf=${userInfo.id}&id=${course_id}&comprou=${true}`)
+    axios.post(`http://localhost:6789/usuario/curso/adquirir?cpf=${userInfo.id}&id=${course_id}&comprou=${true}`)
       .then(resp => {
         console.log("comprou " + course_id);
         navigate(`/course/${course_id}`)
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }
 
   return (

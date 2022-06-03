@@ -64,11 +64,10 @@ function Profile() {
   const { userInfo } = useContext(UserContext);
 
   useEffect(() => {
-    axios.get(`http://26.197.111.55:6789/cursos/proprios?cpf=${userInfo.id}`)
+    axios.get(`http://localhost:6789/cursos/proprios?cpf=${userInfo.id}`)
       .then(resp => {
-        console.log(resp.data);
         setCourses(resp.data);
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }, [id]);
 
   function createCourse() {

@@ -64,11 +64,10 @@ function Home() {
   const { isLogged, userInfo } = useContext(UserContext);
 
   useEffect(() => {
-    axios.get(`http://26.197.111.55:6789/cursos`)
+    axios.get(`http://localhost:6789/cursos`)
       .then(resp => {
         setCourses(resp.data);
-        console.log(resp.data);
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }, []);
 
   return (
@@ -88,7 +87,7 @@ function Home() {
       </section>
       <Carousel cards={courses}>Cursos em promoção</Carousel>
       <Carousel cards={courses}>Cursos recomendados</Carousel>
-      <Carousel cards={courses}>Promoções de <Link to="/404">Blender 3D</Link></Carousel>
+      <Carousel cards={courses}>Promoções de <Link to="/">Blender 3D</Link></Carousel>
     </main>
   );
 }

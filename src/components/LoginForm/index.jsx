@@ -41,10 +41,8 @@ function LoginForm() {
     // localStorage.setItem("activeId", `["${userId}"]`);
     // userContext.setActiveId([userId]);
 
-    axios.get(`http://26.197.111.55:6789/usuario/login?email=${email}&senha=${password}`)
+    axios.get(`http://localhost:6789/usuario/login?email=${email}&senha=${password}`)
       .then(resp => {
-        console.log(resp);
-
         if (resp.data === null) {
           setErrorMessage("Email ou senha inválida.");
           setShowErrorMessage(true);
@@ -52,7 +50,7 @@ function LoginForm() {
           setUserInfo({ id: resp.data.cpf, email: resp.data.email });
           setTimeout(() => navigate("/"), 1000);
         }
-      }).catch(err => console.warn(err));
+      }).catch(err => console.error(err));
   }
 
   return (
