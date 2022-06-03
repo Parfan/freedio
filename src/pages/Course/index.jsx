@@ -22,7 +22,6 @@ function Course() {
   return (
     <>
       {course === null ? navigate("/404") : (
-
         <main className="container">
           <section className={styles.info}>
             <div>

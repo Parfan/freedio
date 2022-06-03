@@ -24,7 +24,7 @@ function Settings() {
         setUserInfo({ ...userInfo, nome: name.trim(), email });
         setIsLogged(false);
       }).catch(err => {
-        console.log(err)
+        console.error(err)
       });
   }
 
@@ -49,7 +49,7 @@ function Settings() {
       }});
       navigate("/");
     }).catch(err => {
-      console.log(err)
+      console.error(err)
     });
   }
 
@@ -63,7 +63,7 @@ function Settings() {
           setUserInfo(newInfo);
           navigate("/");
         }).catch(err => {
-          console.log(err)
+          console.error(err)
         });
     }
   }
@@ -77,7 +77,7 @@ function Settings() {
           console.log("Senha alterada! " + resp.status);
           setIsLogged(false);
         }).catch(err => {
-          console.log(err)
+          console.error(err)
         });
     }
   }
@@ -85,10 +85,9 @@ function Settings() {
   function deleteAccount() {
     axios.delete(`http://26.197.111.55:6789/usuario/remover?cpf=${userInfo.id}`)
       .then(resp => {
-        console.log(resp.data);
         setIsLogged(false);
       }).catch(err => {
-        console.log(err);
+        console.error(err);
       })
   }
 
